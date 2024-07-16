@@ -1,0 +1,1 @@
+.charge-item{border:1px solid #ccc;padding:40rpx 0;margin-bottom:10rpx;text-align:center;font-size:36rpx;color:#888;border-radius:5rpx;cursor:pointer}.active{background-color:#07c160;color:#fff;border-color:#07c160}

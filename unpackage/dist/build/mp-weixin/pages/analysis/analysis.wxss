@@ -1,0 +1,1 @@
+.line{display:flex;margin-bottom:10rpx;grid-gap:10rpx}.line-title{width:200rpx;font-weight:700;text-align:right}.line-content{flex:1}.my-button-primary{width:100%;margin-top:20rpx}
