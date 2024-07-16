@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.TransactionMapper">
+
+    <sql id="Base_Column_List">
+        id,title,content,user_id,accept_id,time,price,otherinfo,address_id,target_id,talk,avator
+    </sql>
+
+    <!--    <select id="selectAll" resultType="com.example.entity.Records">-->
+    <!--        select-->
+    <!--        <include refid="Base_Column_List" />-->
+    <!--        from records-->
+    <!--        <where>-->
+
+    <!--        </where>-->
+    <!--        order by id desc-->
+    <!--    </select>-->
+    <select id="selectAll" resultType="com.example.entity.transaction">
+        select
+        transaction.*, user.username as userName
+        from transaction
+        left join user
+        on transaction.user_id = user.id
+        order by id asc
+    </select>
+
+    <select id="selectById" resultType="com.example.entity.transaction">
+        select
+        <include refid="Base_Column_List" />
+        from transaction
+        where id = #{id}
+    </select>
+
+    <delete id="deleteById">
+        delete from transaction
+        where  id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.example.entity.transaction" useGeneratedKeys="true">
+        insert into transaction
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="title != null">title,</if>
+            <if test="content != null">content,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="price != null">price,</if>
+            <if test="time != null">time,</if>
+            <if test="otherinfo != null">otherinfo,</if>
+            <if test="addressId != null">address_id,</if>
+            <if test="talk != null">talk,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="title != null">#{title},</if>
+            <if test="content != null">#{content},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="price!= null">#{price},</if>
+            <if test="time != null">#{time},</if>
+            <if test="otherinfo != null">#{otherinfo},</if>
+            <if test="addressId != null">#{addressId},</if>
+            <if test="talk != null">#{talk},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.example.entity.transaction">
+        update transaction
+        <set>
+            <if test="acceptId != null">
+                accept_id= #{acceptId},
+            </if>
+            <if test="targetId != null">
+                target_id= #{targetId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>
